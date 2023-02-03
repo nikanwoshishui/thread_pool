@@ -224,8 +224,8 @@ void* THREAD_POOL<T>::Manager(void* args )		//管理者线程
 				
 		}
 
-		//销毁线程	忙碌的线程小于活着的线程 且 任务数量为0
-		if(busynum*2 < livenum && livenum > pool->maxnum)
+		//销毁线程	忙碌的线程小于活着的线程 且 线程存活数量大于最小线程存活数量
+		if(busynum*2 < livenum && livenum > pool->minnum)
 		{
 			pthread_mutex_lock(&pool->mutex);
 			pool->exitnum = NUM;
